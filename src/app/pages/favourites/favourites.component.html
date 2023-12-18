@@ -1,4 +1,4 @@
-<div class="row">
+<div *ngIf="!isError; else errorTemplate" class="row">
     <div>
         <p class="h3">Favourites</p>
     </div>
@@ -27,3 +27,8 @@
         </div>
     </div>
 </div>
+
+
+<ng-template #errorTemplate>
+    <app-error [errorCode]="error.errorCode?.toString() || ''" [errorMessage]="error.errorMessage?.toString() || ''"></app-error>
+</ng-template>

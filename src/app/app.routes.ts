@@ -8,15 +8,16 @@ import { FavouritesComponent } from './pages/favourites/favourites.component';
 import { UnderDevelopmentComponent } from './pages/development/under-development.component';
 import { PageNotFoundComponent } from './pages/error/not-found.component';
 import { authGuard } from './services/auth.guard';
+import { ArticlesComponent } from './pages/articles/articles.component';
 
 export const routes: Routes = [
     {path: "home", component: HomeComponent},
     {path: "", redirectTo: "/home", pathMatch: "full"},
     {path: "authorisation", component: AuthoriseComponent, data: {hideHeader: true}},
     {path: "under-development", component: UnderDevelopmentComponent},
-    {path: "", component: SavesContainerComponent, children: [
+    {path: "saves", component: SavesContainerComponent, children: [
         {
-            path: "saves",
+            path: "",
             component: SavesComponent,
             canActivate: [authGuard]
             // outlet: "saves"
@@ -30,6 +31,12 @@ export const routes: Routes = [
         {
             path: "favourites",
             component: FavouritesComponent,
+            canActivate: [authGuard]
+            // outlet: "saves"
+        },
+        {
+            path: "articles",
+            component: ArticlesComponent,
             canActivate: [authGuard]
             // outlet: "saves"
         }

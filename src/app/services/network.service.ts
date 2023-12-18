@@ -26,6 +26,9 @@ export class NetworkConfig {
     }
 
     get body() {
+        if(!this._body.access_token){
+            this._body.access_token = localStorage.getItem("access_token")
+        }
         return this._body
     }
 

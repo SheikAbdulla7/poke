@@ -11,8 +11,22 @@
                     <li routerLinkActive="active-nav-item" style="padding: 16px 10px;"><a routerLink="/under-development">Discovers</a></li>
                     <li routerLinkActive="active-nav-item" style="padding: 16px 10px;"><a routerLink="/under-development">Collections</a></li>
                 </ul>
-                <div class="profile" (click)="openModal()">
-                    <img src="../../assets/pro.png" alt="profile"/>
+                
+
+                <div ngbDropdown>
+                    <div class="profile" id="dropdown" ngbDropdownToggle>
+                        <img src="../../assets/pro.png" alt="profile"/>
+                    </div>
+                    <div ngbDropdownMenu aria-labelledby="dropdown" style="padding: 0 !important;">
+                        <div class="text-center" style="padding: 10px;">
+                            @if (isLoggedIn) {
+                                <p>Logged in as {{userName}}</p>
+                            } @else {
+                                <p>Login to continue</p>
+                            }
+                            <button class="btn btn-primary" (click)="authoriseUser()">{{!isLoggedIn ? 'Login': 'LogOut' }}</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>

@@ -48,6 +48,9 @@ export class PokeApiService {
                     return [] as Article[]
                 }
                 return this.transformData(list)  
+            }),
+            catchError(err => {
+                return throwError(() => err)
             })
         )
     }

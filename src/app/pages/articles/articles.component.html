@@ -1,13 +1,13 @@
 <div *ngIf="!isError; else errorTemplate" class="row">
     <div>
-        <p class="h3">Archives</p>
+        <p class="h3">Articles</p>
     </div>
 
     <div *ngIf="isLoaderActive" class="spinner-grow text-primary" role="status">
         <span class="visually-hidden">Loading...</span>
     </div>
 
-    <div *ngIf="isArchivesEmpty" class="empty-container">
+    <div *ngIf="isArticlesEmpty" class="empty-container">
         <img src="../../../assets/favourites_empty.svg"/>
 
         <h4>Find your favourites here</h4>
@@ -21,9 +21,9 @@
     </div>
 
     <div class="row d-flex flex-row">
-        <div class="col-4" *ngFor="let archive of archives; let i=index">
+        <div class="col-4" *ngFor="let article of articles; let i=index">
              <!-- <app-pokeitem [save]="save"></app-pokeitem> -->
-            <app-pokeitem [item]="archive"></app-pokeitem>
+            <app-pokeitem [item]="article"></app-pokeitem>
             <div *ngIf="(i+1) % 3 == 0" style="margin: 24px 0px;"></div>
         </div>
     </div>

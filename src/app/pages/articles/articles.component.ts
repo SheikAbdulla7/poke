@@ -1,23 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { PokeApiService } from '../../services/pocket.service';
-import Article from '../../models/Articles';
-import { CommonModule } from '@angular/common';
 import { PokeitemComponent } from '../../pokeitem/pokeitem.component';
+import { CommonModule } from '@angular/common';
+import Article from '../../models/Articles';
 import { Error } from '../../utils/types';
 import { ErrorComponent } from '../error/error.component';
 import { HttpErrorResponse } from '@angular/common/http';
+import { PokeApiService } from '../../services/pocket.service';
 
 @Component({
-  selector: 'app-archived',
+  selector: 'app-articles',
   standalone: true,
   imports: [CommonModule, PokeitemComponent, ErrorComponent],
-  templateUrl: './archived.component.html',
-  styleUrl: './archived.component.css'
+  templateUrl: './articles.component.html',
+  styleUrl: './articles.component.css'
 })
-export class ArchivedComponent implements OnInit {
-
-  archives: Article[] = []
-  isArchivesEmpty = false
+export class ArticlesComponent implements OnInit{
+  articles: Article[] = []
+  isArticlesEmpty = false
   isLoaderActive = true
   isError = false
   error: Error = {}
@@ -25,14 +24,16 @@ export class ArchivedComponent implements OnInit {
   constructor(private pokeApi: PokeApiService) {}
 
   ngOnInit(): void {
-    this.pokeApi.getArchivedArticles().subscribe({
-      next: (archivedList) => {
-          this.isLoaderActive = false;
-          if(!archivedList || archivedList.length == 0) {
-            this.isArchivesEmpty = true
-            return
-          }
-          this.archives = archivedList
+    this.pokeApi.getFavouriteArticles().subscribe({
+      next: (articleList) => {
+        this.isLoaderActive = false;
+        if(!articleList || articleList.length == 0) {
+          this.isArticlesEmpty = true
+          console.log(this.isArticlesEmpty)
+          return
+        }
+        this.articles = articleList
+
       },
       error: (err: HttpErrorResponse) => {
         this.isLoaderActive = false;
@@ -40,6 +41,7 @@ export class ArchivedComponent implements OnInit {
         this.error.errorCode = err.status
         this.error.errorMessage = err.error["error_message"]
         this.isError = true
+        
       }
     })
   }

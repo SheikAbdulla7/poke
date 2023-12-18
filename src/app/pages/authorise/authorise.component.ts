@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, EventEmitter, Output } from "@angular/core";
 import { ActivatedRoute, ParamMap, Router } from "@angular/router";
 import { switchMap } from "rxjs";
 import { PokeAuthService } from "../../services/pokeauth.service";
@@ -31,6 +31,7 @@ export class AuthoriseComponent {
             localStorage.removeItem("access_token")
             console.log(data);
             localStorage.setItem("access_token", data["access_token"]);
+            localStorage.setItem("user_name", data["username"]);
             this.router.navigate(["/saves"])
             // data.accessToken
         })
