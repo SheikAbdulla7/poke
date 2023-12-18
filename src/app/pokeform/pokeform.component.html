@@ -1,0 +1,41 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-title">Add Task</h4>
+    <button
+        type="button"
+        class="btn-close"
+        aria-describedby="modal-title"
+        (click)="modal.dismiss('Cross click')"
+    ></button>
+</div>
+<div class="modal-body">
+
+    <form #form="ngForm" [formGroup]="pokeForm" (ngSubmit)="onSubmit()">
+        <div class="mb-2">
+            <label for="title" class="form-label">Title </label>
+            <input id="title" class="form-control" type="text" formControlName="title">
+            <span class="text-danger" *ngIf="(pokeFormControl.title.touched || submitted) && pokeFormControl.title.errors?.['required']">
+                Title is required
+            </span>
+        </div>
+        <div class="mb-2">
+            <label for="url" class="form-label">Url </label>
+            <input id="url" class="form-control" type="url" formControlName="url">
+            <span class="text-danger" *ngIf="(pokeFormControl.url.touched || submitted) && (pokeFormControl.url.value?.length == 0) && pokeFormControl.url.errors?.['required']">
+                Url is required
+            </span>
+            <span class="text-danger" *ngIf="(pokeFormControl.url.touched || submitted) && (pokeFormControl.url.value?.length != 0) && pokeFormControl.url.errors?.['validUrl']">
+                Enter valid Url
+            </span>
+        </div>
+        <div class="mb-2">
+            <label for="description" class="form-label">Description </label>
+            <input id="description" class="form-control" type="text" formControlName="description">
+        </div>
+    </form>
+    
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="form.ngSubmit.emit()">Save</button>
+    
+</div>

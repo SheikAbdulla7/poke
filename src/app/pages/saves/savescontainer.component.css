@@ -1,0 +1,36 @@
+a { 
+    text-decoration: none; 
+    color: inherit;
+}
+    
+ul {
+    list-style-type: none
+} 
+    
+.fab {
+    width: fit-content;
+    margin-right: 25px;
+    margin-bottom: 40px;
+}
+
+svg {
+    width: 16px; 
+    height: 16px;
+}
+
+.side-nav-item {
+    padding: 10px 10px;
+    border-radius: 6px;
+}
+
+.active-side-nav {
+    background-color: #e0f0ef;
+}
+
+.active-side-nav i {
+    color: #004d48;
+    /* background-color: #004d48; */
+}
+
+/* .active-side-nav  */
+/* .active-side-nav  */

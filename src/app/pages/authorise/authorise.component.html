@@ -1,0 +1,15 @@
+
+<div *ngIf="screen=='login'; else elseTemplate" class="col-12 flex container">
+    <div class="col-12 d-flex container">
+        <img src="../../assets/pocket_logo.png"/>
+        <h3>Login Pocket to view your saves Articles</h3>
+        <button class="btn btn-success" (click)="authoriseUser()">Login</button>
+    </div>
+</div>
+
+<ng-template #elseTemplate>
+    <div class="h-50 border border-primary rounded content">
+        <h3>Let's click the Authorise to connect Poke and Pocket api</h3>
+        <button class="btn btn-success" (click)="authenticate()">Connect</button>
+    </div>
+</ng-template>

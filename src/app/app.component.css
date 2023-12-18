@@ -1,0 +1,8 @@
+:host {
+    --raisedCanvas: 0 2px 12px rgba(0,0,0,.08);
+
+
+    --color-headerbottom: #d9d9d9;
+
+    --color-textSecondary: #666;
+}

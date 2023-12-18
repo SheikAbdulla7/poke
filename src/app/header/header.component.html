@@ -1,0 +1,21 @@
+<header>
+    <div class="header-container">
+        <nav>
+            <div class="header-left">
+                <h2>Poke</h2>
+            </div>
+            <div class="header-right">
+                <ul style="margin: 0 !important;">
+                    <li routerLinkActive="active-nav-item" style="padding: 16px 10px;"><a routerLink="/home">Home</a></li>
+                    <li routerLinkActive="active-nav-item" style="padding: 16px 10px;"><a routerLink="/saves">Saves</a></li>
+                    <li routerLinkActive="active-nav-item" style="padding: 16px 10px;"><a routerLink="/under-development">Discovers</a></li>
+                    <li routerLinkActive="active-nav-item" style="padding: 16px 10px;"><a routerLink="/under-development">Collections</a></li>
+                </ul>
+                <div class="profile" (click)="openModal()">
+                    <img src="../../assets/pro.png" alt="profile"/>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+

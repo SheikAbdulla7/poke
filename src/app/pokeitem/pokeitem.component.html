@@ -1,0 +1,51 @@
+<div class="container border rounded-4 p-0 m-0 mb-10" style="height: 300px !important; overflow: hidden;">
+    <div class="top">
+        <img appRenderImage class= "img-fluid" [src]="item?.imageUrl"/>
+    </div>
+    <div class="d-flex flex-column justify-content-between bottom">
+        <div class="title px-3 py-2">
+            <strong><p class="text title">{{item?.title}}</p></strong>
+        </div>
+        <div class="footer px-3 pb-2 d-flex flex-row justify-content-between align-items-center">
+            <div class="meta-info d-flex flex-column">
+                <p class="publisher"><strong>{{item?.domainName}}</strong></p>
+                <p class="time-to-read" style="color: var(--color-textSecondary)">{{item?.timeToRead ? item?.timeToRead +  " min" : ""}}</p>
+            </div>
+
+            <div ngbDropdown>
+                <div class="footer-action" id="dropdownForm1" ngbDropdownToggle>
+                    <i class="bi bi-three-dots" style="font-size: 1.5rem;"></i>
+                </div>
+                <div ngbDropdownMenu aria-labelledby="dropdownForm1" style="padding: 0 !important;">
+                    <div class="menu">
+                        <div class="px-3" style="padding: 8px 0;" (click)="deleteArticle(item?.id)"><span style="padding-right: 10px;"><i class="bi bi-trash3"></i></span>Delete</div>
+                        <div class="px-3" style="padding: 8px 0;" (click)="archiveArticle(item!)"><span style="padding-right: 10px;"><i class="bi bi-archive"></i></span>{{item?.status == '0' ? 'Archive' : 'Unarchive'}}</div>
+                        <div class="px-3" style="padding: 8px 0;" (click)="favouriteArticle(item!)"><span style="padding-right: 10px;"><i class="bi bi-star"></i></span>{{item?.favourite == '0' ? 'Favourite' : 'Un-Favourite'}}</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="container border rounded-4 h30 p-0 m-0">
+    <div class="top">
+        <img class= "img-fluid" src="https://opengraph.githubassets.com/9c3334cfca0c127dfa6b12ce44a56d20682c24b0115b32e39bac7fff0b280b27/gothinkster/angular-realworld-example-app"/>
+    </div>
+    <div class="d-flex flex-column justify-content-between bottom">
+        <div class="title px-3 mt-2 mb-3">
+            <span class="text"><strong>gothinkster/angular-realworld-example-app</strong></span>
+        </div>
+        <div class="footer px-3 pb-2 d-flex flex-row justify-content-between align-items-center">
+            <div class="meta-info d-flex flex-column">
+                <span class="publisher"><strong>Github</strong></span>
+                <span class="time-to-read" style="color: var(--color-textSecondary)">2 min</span>
+            </div>
+            <div class="footer-action">
+                <i class="bi bi-three-dots"></i>
+            </div>
+        </div>
+    </div>
+</div> -->
