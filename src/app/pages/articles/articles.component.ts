@@ -24,7 +24,7 @@ export class ArticlesComponent implements OnInit{
   constructor(private pokeApi: PokeApiService) {}
 
   ngOnInit(): void {
-    this.pokeApi.getFavouriteArticles().subscribe({
+    this.pokeApi.getArticlesOnly().subscribe({
       next: (articleList) => {
         this.isLoaderActive = false;
         if(!articleList || articleList.length == 0) {
@@ -39,7 +39,7 @@ export class ArticlesComponent implements OnInit{
         this.isLoaderActive = false;
         console.warn(err.status);
         this.error.errorCode = err.status
-        this.error.errorMessage = err.error["error_message"]
+        this.error.errorMessage = err.error["error_message"] || err.statusText
         this.isError = true
         
       }

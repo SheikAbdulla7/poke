@@ -24,16 +24,6 @@ export class FavouritesComponent implements OnInit {
   constructor(private pokeApi: PokeApiService) {}
 
   ngOnInit(): void {
-      // this.pokeApi.getFavouriteArticles().subscribe(favouritesList => {
-      //   this.isLoaderActive = false;
-      //   if(!favouritesList || favouritesList.length == 0) {
-      //     this.isFavouritesEmpty = true
-      //     console.log(this.isFavouritesEmpty)
-      //     return
-      //   }
-      //   this.favourites = favouritesList
-      // })
-
       this.pokeApi.getFavouriteArticles().subscribe({
         next: (favouritesList) => {
           this.isLoaderActive = false;
@@ -49,9 +39,8 @@ export class FavouritesComponent implements OnInit {
           this.isLoaderActive = false;
           console.warn(err.status);
           this.error.errorCode = err.status
-          this.error.errorMessage = err.error["error_message"]
+          this.error.errorMessage = err.error["error_message"] || err.statusText
           this.isError = true
-          
         }
       })
   }

@@ -12,7 +12,7 @@ import { ArticlesComponent } from './pages/articles/articles.component';
 
 export const routes: Routes = [
     {path: "home", component: HomeComponent},
-    {path: "", redirectTo: "/home", pathMatch: "full"},
+    {path: "", redirectTo: "/saves", pathMatch: "full"},
     {path: "authorisation", component: AuthoriseComponent, data: {hideHeader: true}},
     {path: "under-development", component: UnderDevelopmentComponent},
     {path: "saves", component: SavesContainerComponent, children: [

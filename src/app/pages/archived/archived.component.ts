@@ -38,7 +38,7 @@ export class ArchivedComponent implements OnInit {
         this.isLoaderActive = false;
         console.warn(err.status);
         this.error.errorCode = err.status
-        this.error.errorMessage = err.error["error_message"]
+        this.error.errorMessage = err.error["error_message"] || err.statusText
         this.isError = true
       }
     })

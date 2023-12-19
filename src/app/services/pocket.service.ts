@@ -25,6 +25,42 @@ export class PokeApiService {
         }
     }
 
+    addArticles(input: {url: string, title?: string}) {
+        console.log("entered")
+        return this.http.post<{[key: string]: any}>(
+            `${this.config.url}/articles/add`,
+            {
+                ...input,
+                ...this.config.body
+            },
+            this.config.options
+        ).pipe(
+            map((data): Article => {
+                console.log("results")
+                if(!Number(data["status"])) {
+                    console.log("error")
+                }
+                let article =  data["item"]
+                console.log(article)
+                return  {
+                    id: article["resolved_id"],
+                    title: article["resolved_title"] ? article["resolved_title"] : article["title"],
+                    url: article["resolved_url"] ? article["resolved_url"] : article["given_url"],
+                    domainName: article["domain_metadata"] == undefined ? undefined : article["domain_metadata"]["name"],
+                    imageUrl: article["has_image"] == 1 ? article["top_image_url"] : null,
+                    isArticle: article["is_article"],
+                    timeToRead: article["time_to_read"],
+                    favourite: article["favorite"],
+                    status: article["status"]
+                }
+                
+            }),
+            catchError((err) => {
+                return throwError(() => err)
+            })
+        )
+    }
+
     getArticles() {
         console.log("default config ")
         console.log(this.config.body)
@@ -138,11 +174,13 @@ export class PokeApiService {
     archiveArticle(id: number | string) {
         return this.http.post<{[key: string] : any}>(
             `${this.config.url}/articles/action_archive`,
-            [{
-                "action" : "archive",
-                "item_id" : id,
+            {
+                actions: [{
+                    "action" : "archive",
+                    "item_id" : id,
+                }],
                 ... this.config.body
-            }],
+            },
             this.config.options
         ).pipe(
             map(data => {
@@ -157,11 +195,13 @@ export class PokeApiService {
     unarchiveArticle(id: number | string) {
         return this.http.post<{[key: string] : any}>(
             `${this.config.url}/articles/action_archive`,
-            [{
-                "action" : "readd",
-                "item_id" : id,
+            {
+                actions: [{
+                    "action" : "readd",
+                    "item_id" : id,
+                }],
                 ... this.config.body
-            }],
+            },
             this.config.options
         ).pipe(
             map(data => {
@@ -176,11 +216,13 @@ export class PokeApiService {
     favouriteArticle(id: number | string) {
         return this.http.post<{[key: string] : any}>(
             `${this.config.url}/articles/action_favourite`,
-            [{
-                "action" : "favorite",
-                "item_id" : id,
+            {
+                actions: [{
+                    "action" : "favorite",
+                    "item_id" : id,
+                }],
                 ... this.config.body
-            }],
+            },
             this.config.options
         ).pipe(
             map(data => {
@@ -195,11 +237,13 @@ export class PokeApiService {
     unfavouriteArticle(id: number | string) {
         return this.http.post<{[key: string] : any}>(
             `${this.config.url}/articles/action_favourite`,
-            [{
-                "action" : "unfavorite",
-                "item_id" : id,
+            {
+                actions: [{
+                    "action" : "unfavorite",
+                    "item_id" : id,
+                }],
                 ... this.config.body
-            }],
+            },
             this.config.options
         ).pipe(
             map(data => {
@@ -214,11 +258,13 @@ export class PokeApiService {
     deleteArticle(id: number | string) {
         return this.http.post<{[key:string] : any}>(
             `${this.config.url}/articles/action_delete`,
-            [{
-                "action" : "delete",
-                "item_id" : id,
+            {
+                actions: [{
+                    "action" : "delete",
+                    "item_id" : id,
+                }],
                 ... this.config.body
-            }],
+            },
             this.config.options
         ).pipe(
             map(data => {

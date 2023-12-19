@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PokeformComponent } from '../../pokeform/pokeform.component';
 import { ActivatedRoute } from '@angular/router';
@@ -10,6 +10,8 @@ import { ToastsContainer } from '../../toast/toasts-container.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorComponent } from '../error/error.component';
 import { Error } from '../../utils/types';
+import { DataService } from '../../services/data.service';
+import { Subscription } from 'rxjs';
 
 // type Article = {
 //   title: string,
@@ -26,8 +28,9 @@ import { Error } from '../../utils/types';
   templateUrl: './saves.component.html',
   styleUrl: './saves.component.css'
 })
-export class SavesComponent implements OnInit {
+export class SavesComponent implements OnInit, OnDestroy {
 
+  subscription: Subscription
   isSavesEmpty = false
   isLoaderActive = true;
   saves: Article[] = [] 
@@ -36,10 +39,14 @@ export class SavesComponent implements OnInit {
   
 
   constructor(
-    private modalService: NgbModal, 
     private route: ActivatedRoute,
-    private pokeApi: PokeApiService
-  ){}
+    private pokeApi: PokeApiService,
+    private dataService: DataService
+  ){
+    this.subscription = this.dataService.getData().subscribe(article => {
+      this.saves.unshift(article)
+    })
+  }
 
   ngOnInit(): void {
     let val = localStorage.getItem("access_token")
@@ -54,10 +61,9 @@ export class SavesComponent implements OnInit {
         this.saves = savesList
       },
       error: (err: HttpErrorResponse) => {
-        console.log(err.error["error_message"])
-        console.log(err.status)
+        console.log(err)
         this.error.errorCode = err.status
-        this.error.errorMessage = err.error["error_message"]
+        this.error.errorMessage = err.error["error_message"] || err.statusText
         this.isError = true
       }
     })
@@ -65,6 +71,10 @@ export class SavesComponent implements OnInit {
 
   deleteListItem(id: string | number) {
     this.saves = this.saves.filter(save => save.id != id)
+  }
+
+  ngOnDestroy(): void {
+      this.subscription.unsubscribe()
   }
 
 }

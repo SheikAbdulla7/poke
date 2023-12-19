@@ -11,13 +11,6 @@
 
     <form #form="ngForm" [formGroup]="pokeForm" (ngSubmit)="onSubmit()">
         <div class="mb-2">
-            <label for="title" class="form-label">Title </label>
-            <input id="title" class="form-control" type="text" formControlName="title">
-            <span class="text-danger" *ngIf="(pokeFormControl.title.touched || submitted) && pokeFormControl.title.errors?.['required']">
-                Title is required
-            </span>
-        </div>
-        <div class="mb-2">
             <label for="url" class="form-label">Url </label>
             <input id="url" class="form-control" type="url" formControlName="url">
             <span class="text-danger" *ngIf="(pokeFormControl.url.touched || submitted) && (pokeFormControl.url.value?.length == 0) && pokeFormControl.url.errors?.['required']">
@@ -28,9 +21,16 @@
             </span>
         </div>
         <div class="mb-2">
+            <label for="title" class="form-label">Title </label>
+            <input id="title" class="form-control" type="text" formControlName="title">
+            <span class="text-danger" *ngIf="(pokeFormControl.title.touched || submitted) && pokeFormControl.title.errors?.['required']">
+                Title is required
+            </span>
+        </div>
+        <!-- <div class="mb-2">
             <label for="description" class="form-label">Description </label>
             <input id="description" class="form-control" type="text" formControlName="description">
-        </div>
+        </div> -->
     </form>
     
 </div>

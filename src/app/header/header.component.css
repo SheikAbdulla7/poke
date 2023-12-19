@@ -25,9 +25,9 @@ header {
 }
 
 .profile {
-    width: fit-content;
+    width: 80px !important;
     border-radius: 50%;
-    margin-left: 4px;
+
 }
 
 .profile > img {

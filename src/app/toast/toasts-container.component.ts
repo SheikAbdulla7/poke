@@ -10,7 +10,7 @@ import { ToastService } from '../services/toast.service';
     template: `
         @for (toast of toastService.toasts; track toast) {
             <ngb-toast 
-                [autohide]="false" 
+                [autohide]="true" 
                 [delay]="toast.delay || 5000" 
                 [class]="toast.className"
                 (hidden)="toastService.remove(toast)">
